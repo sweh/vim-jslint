@@ -1,0 +1,64 @@
+vim-jslint
+==========
+`vim-jslint` is a Vim plugin that runs the currently open file through
+[JSLint](http://www.jslint.com), a static syntax and style checker for
+JavaScript source code.
+
+This is mainly inspired by the great
+[vim-flake8](https://github.com/nvie/vim-flake8) plugin, that runs the
+currently open file through Flake8
+
+
+Installation
+------------
+
+Install [JSLint](http://www.jslint.com) via npm:
+
+    npm install jslint -g
+
+Use [vundle](https://github.com/gmarik/Vundle.vim) if you're not using it
+already. Then, simply put
+
+    Bundle 'sweh/vim-jslint'
+
+into your ~/.vimrc and run:
+
+    :so ~/.vimrc
+    :BundleInstall
+
+
+Usage
+-----
+1. Open a JavaScript file
+2. Press `<F7>` to run `jslint` on it
+
+It shows the errors inside a quickfix window, which will allow your to quickly
+jump to the error locations by simply pressing [Enter].
+
+
+Customization
+-------------
+If you don't want to use the `<F7>` key for jslint-checking, simply remap it to
+another key.  It autodetects whether it has been remapped and won't register
+the `<F7>` key if so.  For example, to remap it to `<F3>` instead, use:
+
+    autocmd FileType javascipt map <buffer> <F3> :call JSLint()<CR>
+
+To customize the location of your jslint binary, set `g:jslint_cmd`:
+
+    let g:jslint_cmd="/opt/strangebin/jslint000"
+
+
+Tips
+----
+A tip might be to run the JSLint check every time you write a JavaScript file,
+to enable this, add the following line to your `.vimrc` file (thanks
+[Godefroid](http://github.com/gotcha)!):
+
+    autocmd BufWritePost *.js call JSLint()
+
+
+History
+-------
+
+1.0: Initial version.
