@@ -1,26 +1,26 @@
 "
-" JavaScript filetype plugin for running jshint
+" JavaScript filetype plugin for running jslint
 " Language:     JavaScript (ft=javascript)
 " Maintainer:   Sebastian Wehrmann (sebastian.wehrmann@icloud.com)
 " Version:      Vim 7 (may work with lower Vim versions, but not tested)
-" URL:          http://bitbucket.org/sweh/vim-jshint
+" URL:          http://bitbucket.org/sweh/vim-jslint
 "
 " Only do this when not done yet for this buffer
-if exists("b:loaded_jshint_ftplugin")
+if exists("b:loaded_jslint_ftplugin")
     finish
 endif
-let b:loaded_jshint_ftplugin=1
+let b:loaded_jslint_ftplugin=1
 
-if !exists("*JSHint()")
-    function JSHint()
-        if exists("g:jshint_cmd")
-            let s:jshint_cmd=g:jshint_cmd
+if !exists("*JSLint()")
+    function JSLint()
+        if exists("g:jslint_cmd")
+            let s:jslint_cmd=g:jslint_cmd
         else
-            let s:jshint_cmd="jslint"
+            let s:jslint_cmd="jslint"
         endif
 
-        if !executable(s:jshint_cmd)
-            echoerr "File " . s:jshint_cmd . " not found. Please install it first."
+        if !executable(s:jslint_cmd)
+            echoerr "File " . s:jslint_cmd . " not found. Please install it first."
             return
         endif
 
@@ -40,7 +40,7 @@ if !exists("*JSHint()")
         let &grepformat="%-P%f,
                     \%E%>\ #%n\ %m,%Z%.%#Line\ %l\\,\ Pos\ %c,
                     \%-G%f\ is\ OK.,%-Q"
-        let &grepprg=s:jshint_cmd
+        let &grepprg=s:jslint_cmd
         silent! grep! %
 
         " restore grep settings
@@ -63,7 +63,7 @@ if !exists("*JSHint()")
             " Show OK status
             hi Green ctermfg=green
             echohl Green
-            echon "JSHint check OK"
+            echon "JSLint check OK"
             echohl
         endif
     endfunction
@@ -72,8 +72,8 @@ endif
 " Add mappings, unless the user didn't want this.
 " The default mapping is registered under to <F7> by default, unless the user
 " remapped it already (or a mapping exists already for <F7>)
-if !exists("no_plugin_maps") && !exists("no_jshint_maps")
-    if !hasmapto('JSHint(')
-        noremap <buffer> <F7> :call JSHint()<CR>
+if !exists("no_plugin_maps") && !exists("no_jslint_maps")
+    if !hasmapto('JSLint(')
+        noremap <buffer> <F7> :call JSLint()<CR>
     endif
 endif
