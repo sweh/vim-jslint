@@ -16,7 +16,7 @@ if !exists("*JSLint()")
         if exists("g:jslint_cmd")
             let s:jslint_cmd=g:jslint_cmd
         else
-            let s:jslint_cmd="jslint"
+            let s:jslint_cmd="eslint"
         endif
 
         if !executable(s:jslint_cmd)
